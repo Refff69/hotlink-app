@@ -1,0 +1,96 @@
+# =========================================================
+# FILE: .gitignore
+# DESKRIPSI: File & folder yang TIDAK boleh diupload ke Git
+# =========================================================
+
+# =========================================================
+# 1. FILE RAHASIA (PALING PENTING!)
+# =========================================================
+# File .env berisi token bot Telegram & chat ID
+# JANGAN PERNAH di-upload ke GitHub!
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+
+# =========================================================
+# 2. NODE.JS
+# =========================================================
+# Folder dependencies (bisa di-install ulang dengan 'npm install')
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+yarn.lock
+
+# =========================================================
+# 3. FILE SISTEM OPERASI
+# =========================================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# =========================================================
+# 4. EDITOR / IDE
+# =========================================================
+# VS Code
+.vscode/
+!.vscode/extensions.json
+
+# JetBrains (WebStorm, IntelliJ, dll)
+.idea/
+*.iml
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# =========================================================
+# 5. LOG & FILE TEMPORARY
+# =========================================================
+*.log
+logs/
+*.tmp
+*.temp
+*.cache
+.cache/
+dist/
+build/
+
+# =========================================================
+# 6. BACKUP FILE
+# =========================================================
+*.bak
+*.backup
+*.old
+*.orig
+*~
+
+# =========================================================
+# 7. FILE TEST / DEVELOPMENT
+# =========================================================
+test/
+tests/
+coverage/
+.nyc_output/
+
+# =========================================================
+# 8. FILE LAINNYA
+# =========================================================
+# Screenshot & video development
+
+# Kecuali di folder assets / images
+
+# File konfigurasi lokal
+*.local
+.local/

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotlink App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+
+        <!-- =========================================================
+             HALAMAN 1: LANDING PAGE
+             ========================================================= -->
+        <div class="screen active" id="screen-landing">
+            <div class="header-section landing-header">
+                <div class="logo-placeholder"></div>
+            </div>
+            
+            <div class="content-section landing-content">
+                <h1 class="title">Selamat datang ke Hotlink</h1>
+                <button class="btn btn-primary" id="btn-login">Log Masuk</button>
+                <button class="btn btn-secondary">Aktifkan atau Dapatkan SIM Baharu</button>
+                <p class="footer-text">Dapatkan eSIM atau aktifkan SIM Hotlink anda</p>
+                
+                <div class="support-footer">
+                    <button class="btn-support">
+                        <span class="info-icon">i</span> Bantuan
+                    </button>
+                    <p class="version-text">5.45.0</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================================================
+             HALAMAN 2: INPUT NOMOR TELEFON
+             ========================================================= -->
+        <div class="screen hidden" id="screen-phone">
+            <div class="header-section header-solid">
+                <div class="back-btn" id="btn-phone-back">&#8592;</div>
+                <div class="logo-circle"></div>
+                <img src="iklan-hotlink.jpg" alt="Hotlink">
+            </div>
+            <div class="content-section">
+                <h1 class="title">Nombor telefon</h1>
+                
+                <div class="input-group">
+                    <span class="country-code">60</span>
+                    <input type="tel" class="phone-input" id="input-phone" placeholder="123456789" autofocus>
+                </div>
+
+                <p class="terms-text">
+                    Dengan mengklik Teruskan, saya mengisytiharkan bahawa saya telah membaca, memahami dan bersetuju dengan Terma & Syarat dan Notis Privasi Kumpulan Maxis (MGPN), dan bersetuju dengan pemprosesan data peribadi saya termasuk data peribadi sensitif mengikut MGPN.
+                </p>
+
+                <button class="btn-continue" id="btn-phone-continue" disabled>Teruskan</button>
+            </div>
+        </div>
+
+        <!-- =========================================================
+             HALAMAN 3: INPUT OTP
+             ========================================================= -->
+        <div class="screen hidden" id="screen-otp">
+            <div class="header-section header-solid">
+                <div class="back-btn" id="btn-otp-back">&#8592;</div>
+                <div class="logo-circle"></div>
+                <img src="iklan-hotlink.jpg" alt="Hotlink">
+            </div>
+            <div class="content-section">
+                <h1 class="title">6 digit kod</h1>
+                <div class="input-group">
+                    <input type="text" class="otp-input" id="input-otp" placeholder="000000" maxlength="6" autofocus>
+                </div>
+
+                <div class="info-message">
+                    <div class="check-icon">✓</div>
+                    <p>Masukkan kod pengesahan TAC yang dihantar kepada <br><strong id="display-phone">60125678080</strong></p>
+                </div>
+
+                <div class="resend-section">
+                    <h2>Tidak menerima TAC anda?</h2>
+                    <p id="timer-text">Hantar semula kod dalam 01:54</p>
+                </div>
+
+                <hr class="divider">
+
+                <div class="help-section">
+                    <h3>Mengapa anda tidak menerima TAC:</h3>
+                    <ul>
+                        <li>Nombor Mudah Alih Salah: Untuk membetulkannya, kembali ke skrin sebelumnya.</li>
+                        <li>Pengguna Android: Semak "Spam & disekat" dalam apl Messages. Ketik menu tiga titik atau ikon profil anda di bahagian atas sebelah kanan, kemudian pilih "Spam & disekat."</li>
+                        <li>Pengguna Maxis: Muat turun aplikasi Maxis untuk akses mudah</li>
+                    </ul>
+                </div>
+
+                <p class="terms-text">
+                    Dengan mengklik Teruskan, saya mengisytiharkan bahawa saya telah membaca, memahami dan bersetuju dengan Terma & Syarat dan Notis Privasi Kumpulan Maxis (MGPN), dan bersetuju dengan pemprosesan data peribadi saya termasuk data peribadi sensitif mengikut MGPN.
+                </p>
+
+                <button class="btn-continue" id="btn-otp-continue" disabled>Teruskan</button>
+            </div>
+        </div>
+
+        <!-- =========================================================
+             HALAMAN 4: DASHBOARD
+             ========================================================= -->
+        <div class="screen hidden" id="screen-dashboard">
+            
+            <!-- Header -->
+            <div class="dash-header">
+                <div class="dash-greeting">
+                    <span class="dash-hi">Hai,</span>
+                    <span class="dash-user" id="dash-user-name">Pengguna Hotlink</span>
+                </div>
+                <div class="dash-avatar" id="btn-avatar">👤</div>
+            </div>
+
+            <!-- Konten -->
+            <div class="dash-content">
+                
+                <!-- Kartu Rewards -->
+                <div class="card card-rewards">
+                    <p class="card-label">Hotlink Rewards</p>
+                    <h2 class="card-value" id="rewards-value">0 Mata Ganjaran</h2>
+                    <button class="card-btn" id="btn-tebus">Tebus Ganjaran</button>
+                </div>
+
+                <!-- Spin Wheel Section -->
+                <div class="spin-section">
+                    <h3 class="spin-title">🎉 Cuba Nasib Anda!</h3>
+                    <p class="spin-subtitle">Putar roda untuk menang hadiah menarik</p>
+
+                    <!-- Spin Wheel -->
+                    <div class="spin-wrapper" id="spin-wrapper">
+                        <div class="pointer"></div>
+                        <div class="dots-container" id="dots-container"></div>
+
+                        <div class="wheel" id="wheel">
+                            <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="150" cy="150" r="150" fill="#ffffff"/>
+
+                                <path d="M 150 150 L 150 20 A 130 130 0 0 1 262.58 85 Z" fill="#da291c"/>
+                                <path d="M 150 150 L 262.58 85 A 130 130 0 0 1 262.58 215 Z" fill="#8b1a5c"/>
+                                <path d="M 150 150 L 262.58 215 A 130 130 0 0 1 150 280 Z" fill="#da291c"/>
+                                <path d="M 150 150 L 150 280 A 130 130 0 0 1 37.42 215 Z" fill="#8b1a5c"/>
+                                <path d="M 150 150 L 37.42 215 A 130 130 0 0 1 37.42 85 Z" fill="#da291c"/>
+                                <path d="M 150 150 L 37.42 85 A 130 130 0 0 1 150 20 Z" fill="#8b1a5c"/>
+
+                                <!-- Sector 0: RM5,999 Cash -->
+<g transform="rotate(30, 150, 150)">
+    <circle cx="150" cy="72" r="16" fill="#ffffff" opacity="0.9"/>
+    <text x="150" y="78" text-anchor="middle" font-size="16">💵</text>
+    <text x="150" y="110" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="bold">RM5,999</text>
+    <text x="150" y="122" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="bold">Cash</text>
+</g>
+
+<!-- Sector 1: RM500 Cash -->
+<g transform="rotate(90, 150, 150)">
+    <circle cx="150" cy="72" r="16" fill="#ffffff" opacity="0.9"/>
+    <text x="150" y="78" text-anchor="middle" font-size="16">💵</text>
+    <text x="150" y="110" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="bold">RM500</text>
+    <text x="150" y="122" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="bold">Cash</text>
+</g>
+
+<!-- Sector 2: RM100 Cash -->
+<g transform="rotate(150, 150, 150)">
+    <circle cx="150" cy="72" r="16" fill="#ffffff" opacity="0.9"/>
+    <text x="150" y="78" text-anchor="middle" font-size="16">💵</text>
+    <text x="150" y="110" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="bold">RM100</text>
+    <text x="150" y="122" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="bold">Cash</text>
+</g>
+
+<!-- Sector 3: RM50 Cash -->
+<g transform="rotate(210, 150, 150)">
+    <circle cx="150" cy="72" r="16" fill="#ffffff" opacity="0.9"/>
+    <text x="150" y="78" text-anchor="middle" font-size="16">💵</text>
+    <text x="150" y="110" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="bold">RM50</text>
+    <text x="150" y="122" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="bold">Cash</text>
+</g>
+
+<!-- Sector 4: RM10 Cash -->
+<g transform="rotate(270, 150, 150)">
+    <circle cx="150" cy="72" r="16" fill="#ffffff" opacity="0.9"/>
+    <text x="150" y="78" text-anchor="middle" font-size="16">💴</text>
+    <text x="150" y="110" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="bold">RM10</text>
+    <text x="150" y="122" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="bold">Cash</text>
+</g>
+
+<!-- Sector 5: RM1,000 Cash -->
+<g transform="rotate(330, 150, 150)">
+    <circle cx="150" cy="72" r="16" fill="#ffffff" opacity="0.9"/>
+    <text x="150" y="78" text-anchor="middle" font-size="16">💵</text>
+    <text x="150" y="110" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="bold">RM1,000</text>
+    <text x="150" y="122" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="bold">Cash</text>
+</g>
+                            </svg>
+                        </div>
+
+                        <button class="spin-btn" id="spin-btn">Spin</button>
+                    </div>
+
+                    <!-- Countdown Banner -->
+                    <div class="cooldown-banner hidden" id="cooldown-banner">
+                        <p class="cooldown-text">
+                            Hang tight! The game isn't ready just yet.<br>
+                            Check back later for your free rewards!
+                        </p>
+                        <div class="countdown">
+                            <div class="countdown-item">
+                                <div class="countdown-box" id="cd-days">00</div>
+                                <p class="countdown-label">Days</p>
+                            </div>
+                            <div class="countdown-item">
+                                <div class="countdown-box" id="cd-hours">00</div>
+                                <p class="countdown-label">Hours</p>
+                            </div>
+                            <div class="countdown-item">
+                                <div class="countdown-box" id="cd-mins">00</div>
+                                <p class="countdown-label">Mins</p>
+                            </div>
+                            <div class="countdown-item">
+                                <div class="countdown-box" id="cd-secs">00</div>
+                                <p class="countdown-label">Secs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <button class="btn-logout" id="btn-logout">
+                <span class="logout-icon">⎋</span> Log Keluar </button>
+
+            </div>
+        </div>
+
+        <!-- =========================================================
+             HALAMAN 5: GANJARAN SAYA
+             ========================================================= -->
+        <div class="screen hidden" id="screen-rewards">
+            
+            <div class="rewards-header">
+                <div class="btn-back" id="btn-rewards-back">&#8592;</div>
+                <h1>Ganjaran Saya</h1>
+                <p>Senarai hadiah yang telah anda menangi</p>
+            </div>
+
+            <div class="rewards-content">
+                <div class="rewards-total">
+                    <p class="rewards-total-label">JUMLAH GANJARAN</p>
+                    <p class="rewards-total-value" id="total-rewards">0 Hadiah</p>
+                </div>
+
+                <p class="section-label">Hadiah Terkumpul</p>
+                <div class="prize-list" id="prize-list"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- =========================================================
+         MODAL 1: POPUP "SELAMAT!" (Setelah Spin)
+         ========================================================= -->
+    <div class="modal-overlay" id="win-modal">
+        <div class="modal-card">
+            <div class="modal-icon">💵</div>
+            <h2 class="modal-title">Selamat!</h2>
+            <p class="modal-prize" id="modal-prize-text">RM5,999 Phone</p>
+            <button class="modal-btn" id="modal-close-btn">OK</button>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         MODAL 2: POPUP "TEBUS GANJARAN" (Claim via WhatsApp)
+         ========================================================= -->
+    <div class="modal-overlay" id="redeem-modal">
+        <div class="modal-card">
+            <div class="wa-icon-wrapper">
+                <svg viewBox="0 0 24 24" width="45" height="45" fill="#ffffff">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                </svg>
+            </div>
+            
+            <h2 class="modal-title">Tebus Ganjaran</h2>
+            <p class="wa-subtitle">Claim hadiah anda melalui WhatsApp</p>
+            
+            <div class="wa-prize-preview">
+                <div class="wa-prize-icon" id="wa-prize-icon">📱</div>
+                <div class="wa-prize-info">
+                    <p class="wa-prize-label">Hadiah Anda</p>
+                    <p class="wa-prize-name" id="wa-prize-name">RM5,999 Phone</p>
+                </div>
+            </div>
+            
+            <a href="#" class="wa-btn" id="wa-btn" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="#ffffff" style="margin-right: 8px;">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                </svg>
+                Claim via WhatsApp
+            </a>
+            
+            <button class="modal-btn modal-btn-secondary" id="redeem-close-btn">Tutup</button>
+        </div>
+    </div>
+    <!-- ⬇️⬇️⬇️ TAMBAHKAN MODAL LOGOUT DI SINI ⬇️⬇️⬇️ -->
+        <div class="modal-overlay" id="logout-modal">
+            <div class="modal-card">
+                <div class="logout-icon-wrapper">
+                    <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                        <polyline points="16 17 21 12 16 7"/>
+                        <line x1="21" y1="12" x2="9" y2="12"/>
+                    </svg>
+                </div>
+                
+                <h2 class="modal-title">Log Keluar?</h2>
+                <p class="logout-subtitle">
+                    Anda akan keluar dari akaun ini. Yakin ingin meneruskan?
+                </p>
+                
+                <div class="logout-actions">
+                    <button class="modal-btn modal-btn-ghost" id="logout-cancel-btn">
+                        Batal
+                    </button>
+                    <button class="modal-btn modal-btn-danger" id="logout-confirm-btn">
+                        Ya, Log Keluar
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- ⬆️⬆️⬆️ SELESAI MODAL LOGOUT ⬆️⬆️⬆️ -->
+    <script src="script.js"></script>
+</body>
+</html>

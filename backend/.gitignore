@@ -1,0 +1,19 @@
+# =========================================================
+# FILE: backend/.gitignore
+# =========================================================
+
+# File rahasia
+.env
+.env.local
+.env.*
+
+# Dependencies
+node_modules/
+
+# Log
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db

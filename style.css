@@ -1,0 +1,791 @@
+/* =========================================================
+   FILE: style.css
+   DESKRIPSI: Semua gaya untuk aplikasi Hotlink
+   ========================================================= */
+
+/* =========================================================
+   1. RESET & PENGATURAN DASAR
+   ========================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px 0;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 400px;
+    background-color: #ffffff;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    position: relative;
+    min-height: 850px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Utility */
+.screen {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    flex-grow: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.hidden { display: none !important; }
+
+/* Animasi Slide Up */
+.active {
+    animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    position: relative;
+}
+@keyframes slideUp {
+    0% { opacity: 0; transform: translateY(80px) scale(0.98); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+
+/* =========================================================
+   2. HALAMAN 1: LANDING PAGE
+   ========================================================= */
+.header-section {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.landing-header {
+    flex-grow: 1;
+    background-color: #da291c;
+    background-image: url('iklan-hotlink.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.header-solid {
+    background-color: #da291c;
+    background-image: url('iklan-hotlink.jpg');   /* ← TAMBAHKAN */
+    background-size: cover;
+    background-position: center 25%;               /* ← FOKUS ke atas 25% */
+    background-repeat: no-repeat;
+    height: 180px;
+    min-height: 180px;
+    max-height: 180px;
+    position: relative;
+    overflow: hidden;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+/* Overlay merah transparan agar tulisan terbaca */
+.header-solid::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(218, 41, 28, 0.3) 0%,
+        rgba(218, 41, 28, 0.7) 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Tombol back & logo di atas overlay */
+.header-solid .back-btn,
+.header-solid .logo-circle {
+    z-index: 5;
+}
+
+
+.back-btn {
+    position: absolute; top: 20px; left: 20px;
+    width: 45px; height: 45px;
+    background-color: #111111; border-radius: 50%;
+    display: flex; justify-content: center; align-items: center;
+    color: #ffffff; font-size: 22px; font-weight: bold;
+    cursor: pointer; user-select: none; z-index: 20;
+}
+
+.logo-circle {
+    width: 70px;
+    height: 70px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;                          /* jarak logo dari tepi lingkaran */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    z-index: 3;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.logo-circle img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;                    /* agar logo tidak terpotong */
+    display: block;
+}
+
+.content-section {
+    background-color: #ffffff;
+    border-top-left-radius: 35px; border-top-right-radius: 35px;
+    padding: 35px 25px 25px 25px;
+    margin-top: -35px; position: relative; z-index: 10;
+    display: flex; flex-direction: column; text-align: center;
+}
+
+.landing-content {
+    flex-grow: 0; height: auto;
+    background-color: #fdf8f8;
+}
+
+.title {
+    font-size: 22px; font-weight: 800;
+    color: #111111; margin-bottom: 30px;
+    letter-spacing: -0.5px;
+}
+
+.btn {
+    display: block; width: 100%; padding: 16px;
+    border-radius: 50px; font-size: 16px; font-weight: 700;
+    cursor: pointer; margin-bottom: 15px; transition: all 0.2s ease;
+}
+.btn-primary { background-color: #111111; color: #ffffff; border: 2px solid #111111; }
+.btn-primary:hover { background-color: #333333; }
+.btn-secondary { background-color: transparent; color: #111111; border: 2px solid #111111; }
+.btn-secondary:hover { background-color: #f0f0f0; }
+
+.footer-text {
+    font-size: 13px; color: #333333; margin-top: 5px;
+    font-weight: 500; margin-bottom: 30px;
+}
+
+.support-footer {
+    border-top: 1px solid #e0e0e0; padding-top: 15px;
+    display: flex; flex-direction: column; align-items: center; gap: 15px;
+}
+.btn-support {
+    background-color: #f0f0f0; border: none; border-radius: 50px;
+    padding: 10px 25px; font-size: 14px; font-weight: 700;
+    display: flex; align-items: center; gap: 8px; cursor: pointer; color: #111111;
+}
+.info-icon {
+    background-color: #da291c; color: #ffffff; border-radius: 50%;
+    width: 18px; height: 18px; display: flex; justify-content: center; align-items: center;
+    font-size: 12px; font-family: serif; font-weight: bold;
+}
+.version-text { font-size: 12px; color: #999999; }
+
+
+/* =========================================================
+   3. HALAMAN 2 & 3: INPUT NOMOR & OTP
+   ========================================================= */
+.input-group {
+    display: flex; align-items: center; border-bottom: 3px solid #111111;
+    padding-bottom: 10px; margin-bottom: 25px; padding-left: 10px;
+}
+.country-code { font-size: 22px; font-weight: 800; color: #111111; margin-right: 15px; }
+.phone-input, .otp-input {
+    border: none; background: transparent; font-size: 24px;
+    font-weight: 800; color: #111111; width: 100%; outline: none;
+}
+.phone-input { letter-spacing: 0.5px; }
+.otp-input { letter-spacing: 3px; text-align: left; }
+.phone-input::placeholder, .otp-input::placeholder {
+    color: #999999; font-weight: 700; opacity: 1;
+}
+
+.info-message {
+    display: flex; align-items: flex-start; margin-bottom: 35px;
+    padding-left: 10px; text-align: left;
+}
+.check-icon {
+    width: 22px; height: 22px; background-color: #111111; color: #ffffff;
+    border-radius: 50%; display: flex; justify-content: center; align-items: center;
+    font-size: 12px; font-weight: bold; margin-right: 10px;
+    flex-shrink: 0; margin-top: 2px;
+}
+.info-message p { font-size: 14px; color: #111111; font-weight: 600; line-height: 1.4; }
+
+.resend-section { text-align: center; margin-bottom: 20px; }
+.resend-section h2 { font-size: 16px; font-weight: 800; color: #111111; margin-bottom: 5px; }
+.resend-section p { font-size: 14px; color: #555555; }
+
+.divider { border: none; border-top: 1px solid #e0e0e0; margin: 20px 0; }
+
+.help-section { text-align: left; margin-bottom: 20px; }
+.help-section h3 { font-size: 14px; font-weight: 800; color: #111111; margin-bottom: 10px; }
+.help-section ul { padding-left: 20px; }
+.help-section li { font-size: 13px; color: #333333; line-height: 1.6; margin-bottom: 8px; }
+
+.terms-text {
+    font-size: 12px; color: #777777; line-height: 1.5;
+    margin-bottom: 25px; text-align: justify;
+}
+
+.btn-continue {
+    width: 100%; padding: 18px; border-radius: 50px;
+    background-color: #c4c4c4; color: #ffffff;
+    font-size: 16px; font-weight: 700; border: none;
+    cursor: not-allowed; margin-top: auto; transition: all 0.3s ease;
+}
+.btn-continue.active { background-color: #111111; cursor: pointer; }
+
+
+/* =========================================================
+   4. HALAMAN 4: DASHBOARD
+   ========================================================= */
+.dash-header {
+    background-color: #da291c;
+    padding: 50px 25px 60px 25px;
+    display: flex; justify-content: space-between; align-items: center;
+    color: #ffffff;
+}
+.dash-greeting { display: flex; flex-direction: column; gap: 4px; }
+.dash-hi { font-size: 14px; opacity: 0.9; }
+.dash-user { font-size: 18px; font-weight: 800; }
+
+.dash-avatar {
+    width: 50px; height: 50px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex; justify-content: center; align-items: center;
+    font-size: 24px; cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.dash-avatar:hover { background-color: rgba(255, 255, 255, 0.35); }
+
+.dash-content {
+    background-color: #fdf8f8;
+    padding: 0 20px 25px 20px;
+    margin-top: -30px;
+    border-top-left-radius: 30px; border-top-right-radius: 30px;
+    position: relative; z-index: 10;
+    display: flex; flex-direction: column; gap: 15px;
+    flex-grow: 1;
+}
+
+/* Kartu */
+.card {
+    background-color: #ffffff; border-radius: 20px;
+    padding: 20px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    display: flex; flex-direction: column; gap: 10px;
+}
+.card-label {
+    font-size: 13px; color: #777777; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.5px;
+}
+.card-value {
+    font-size: 22px; font-weight: 800; color: #111111;
+    margin-bottom: 5px; transition: all 0.4s ease;
+}
+.card-value.flash { color: #da291c; transform: scale(1.08); }
+.card-rewards {
+    background: linear-gradient(135deg, #ffffff 0%, #fff5f5 100%);
+    margin-top: 20px; border-left: 5px solid #da291c;
+}
+.card-btn {
+    background-color: #111111; color: #ffffff; border: none;
+    padding: 12px 20px; border-radius: 50px; font-size: 14px;
+    font-weight: 700; cursor: pointer; width: fit-content;
+    align-self: flex-start;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+.card-btn:hover { background-color: #333333; }
+.card-btn:active { transform: scale(0.97); }
+
+
+/* =========================================================
+   5. SPIN WHEEL
+   ========================================================= */
+.spin-section {
+    margin-top: 5px;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.spin-title { font-size: 18px; font-weight: 800; color: #111111; text-align: center; }
+.spin-subtitle { font-size: 12px; color: #777777; margin-bottom: 5px; }
+
+.spin-wrapper {
+    position: relative; width: 340px; height: 360px;
+    display: flex; justify-content: center; align-items: center;
+    margin-top: 10px;
+}
+
+.pointer {
+    position: absolute; top: 5px; left: 50%;
+    transform: translateX(-50%);
+    width: 42px; height: 68px;
+    background: radial-gradient(circle at 50% 30%, #555 0%, #1a1a1a 40%, #000 80%);
+    border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+    z-index: 30;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+    border-top: 2px solid #888;
+}
+.pointer::after {
+    content: '';
+    position: absolute; bottom: -12px; left: 50%;
+    transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 13px solid transparent;
+    border-right: 13px solid transparent;
+    border-top: 17px solid #000;
+}
+
+.dots-container {
+    position: absolute; top: 50%; left: 50%;
+    width: 320px; height: 320px; border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5; pointer-events: none;
+}
+.dot {
+    position: absolute; width: 11px; height: 11px;
+    background-color: #ff2a1f; border-radius: 50%;
+    box-shadow: 0 0 6px 2px rgba(255, 42, 31, 0.8);
+    transform-origin: 0 0;
+}
+
+.wheel {
+    width: 290px; height: 290px; border-radius: 50%;
+    position: relative;
+    transition: transform 5s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+    filter: drop-shadow(0 0 12px rgba(218, 41, 28, 0.35));
+    z-index: 10;
+}
+.wheel svg { width: 100%; height: 100%; display: block; border-radius: 50%; }
+
+.spin-btn {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px; height: 100px; border-radius: 50%;
+    background: radial-gradient(circle at 50% 30%, #4a4a4a 0%, #1a1a1a 50%, #000 100%);
+    color: #ffffff; font-size: 22px; font-weight: 700;
+    border: none; cursor: pointer; z-index: 25;
+    box-shadow: 
+        0 10px 25px rgba(0,0,0,0.6),
+        inset 0 -5px 15px rgba(0,0,0,0.8),
+        inset 0 5px 15px rgba(255,255,255,0.1);
+    transition: transform 0.15s ease;
+    letter-spacing: 1px;
+}
+.spin-btn:active { transform: translate(-50%, -50%) scale(0.95); }
+.spin-btn:disabled { cursor: not-allowed; opacity: 0.8; }
+
+
+/* =========================================================
+   6. COUNTDOWN BANNER
+   ========================================================= */
+.cooldown-banner {
+    background-color: #da291c;
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(255,255,255,0.06) 0%, transparent 30%),
+        radial-gradient(circle at 90% 80%, rgba(255,255,255,0.06) 0%, transparent 30%),
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.03) 0%, transparent 50%);
+    background-size: 200px 200px, 250px 250px, 300px 300px;
+    border-radius: 20px;
+    padding: 30px 20px 25px 20px;
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(218, 41, 28, 0.35);
+    animation: fadeSlideIn 0.5s ease;
+}
+@keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.cooldown-text {
+    color: #ffffff; font-size: 14px; font-weight: 600;
+    line-height: 1.55; margin-bottom: 22px;
+    padding: 0 5px; text-align: center;
+}
+.countdown { display: flex; justify-content: center; gap: 10px; }
+.countdown-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.countdown-box {
+    background-color: #111111; color: #ffffff;
+    font-size: 20px; font-weight: 800;
+    padding: 14px 8px; border-radius: 12px;
+    min-width: 52px; text-align: center; letter-spacing: 1px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+.countdown-label {
+    font-size: 11px; color: #ffffff;
+    opacity: 0.9; font-weight: 600; letter-spacing: 0.3px;
+}
+
+
+/* =========================================================
+   7. HALAMAN 5: GANJARAN SAYA
+   ========================================================= */
+.rewards-header {
+    background-color: #da291c;
+    padding: 30px 25px 60px 25px;
+    color: #ffffff; position: relative;
+}
+.rewards-header h1 { font-size: 22px; font-weight: 800; margin-top: 15px; }
+.rewards-header p { font-size: 13px; opacity: 0.9; margin-top: 5px; }
+
+.btn-back {
+    width: 42px; height: 42px;
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+    display: flex; justify-content: center; align-items: center;
+    color: #ffffff; font-size: 20px; font-weight: bold;
+    cursor: pointer; user-select: none;
+    transition: background-color 0.2s ease;
+}
+.btn-back:hover { background-color: rgba(0, 0, 0, 0.4); }
+
+.rewards-content {
+    background-color: #fdf8f8;
+    padding: 0 20px 25px 20px;
+    margin-top: -30px;
+    border-top-left-radius: 30px; border-top-right-radius: 30px;
+    position: relative; z-index: 10;
+    flex-grow: 1;
+    display: flex; flex-direction: column; gap: 15px;
+}
+
+.rewards-total {
+    background: linear-gradient(135deg, #da291c 0%, #8b1a5c 100%);
+    color: #ffffff; border-radius: 20px;
+    padding: 20px; margin-top: 20px;
+    box-shadow: 0 8px 20px rgba(218, 41, 28, 0.3);
+}
+.rewards-total-label { font-size: 12px; opacity: 0.9; letter-spacing: 0.5px; }
+.rewards-total-value { font-size: 24px; font-weight: 800; margin-top: 5px; }
+
+.section-label { font-size: 14px; font-weight: 800; color: #111111; margin-top: 10px; }
+
+.prize-list { display: flex; flex-direction: column; gap: 10px; }
+
+.prize-item {
+    background-color: #ffffff; border-radius: 15px;
+    padding: 15px; display: flex; align-items: center; gap: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    animation: fadeIn 0.4s ease;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.prize-icon {
+    width: 45px; height: 45px;
+    background-color: #fff5f5; border-radius: 12px;
+    display: flex; justify-content: center; align-items: center;
+    font-size: 22px; flex-shrink: 0;
+}
+.prize-info { flex-grow: 1; }
+.prize-name { font-size: 14px; font-weight: 800; color: #111111; }
+.prize-date { font-size: 11px; color: #999999; margin-top: 3px; }
+
+.btn-redeem {
+    background-color: #da291c; color: #ffffff;
+    border: none; padding: 8px 15px;
+    border-radius: 50px; font-size: 12px;
+    font-weight: 700; cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.btn-redeem:hover { background-color: #b02015; }
+
+.empty-state { text-align: center; padding: 40px 20px; color: #999999; }
+.empty-state-icon { font-size: 48px; margin-bottom: 10px; }
+.empty-state-text { font-size: 13px; line-height: 1.5; }
+
+
+/* =========================================================
+   8. MODAL OVERLAY (Umum)
+   ========================================================= */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 1000;
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    padding: 20px;
+}
+.modal-overlay.show { opacity: 1; visibility: visible; }
+
+.modal-card {
+    background-color: #ffffff; border-radius: 25px;
+    padding: 40px 30px 30px 30px;
+    max-width: 340px; width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    transform: scale(0.8) translateY(20px);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.modal-overlay.show .modal-card { transform: scale(1) translateY(0); }
+
+.modal-icon {
+    font-size: 70px; line-height: 1;
+    margin-bottom: 20px; display: inline-block;
+    animation: bounceIn 0.6s ease;
+}
+@keyframes bounceIn {
+    0% { transform: scale(0); }
+    60% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.modal-title {
+    font-size: 30px; font-weight: 800;
+    color: #111111; margin-bottom: 15px;
+    letter-spacing: -0.5px;
+}
+.modal-prize {
+    font-size: 22px; font-weight: 800;
+    color: #da291c; margin-bottom: 25px;
+    letter-spacing: -0.3px;
+}
+.modal-btn {
+    background-color: #111111; color: #ffffff;
+    border: none; padding: 14px 50px;
+    border-radius: 50px; font-size: 15px;
+    font-weight: 700; cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+.modal-btn:hover { background-color: #333333; }
+.modal-btn:active { transform: scale(0.97); }
+
+
+/* =========================================================
+   9. MODAL "TEBUS GANJARAN" (WhatsApp)
+   ========================================================= */
+.wa-icon-wrapper {
+    width: 80px; height: 80px;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    border-radius: 50%;
+    display: flex; justify-content: center; align-items: center;
+    margin: 0 auto 20px auto;
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+    animation: waPulse 2s ease-in-out infinite;
+}
+@keyframes waPulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4); }
+    50% { transform: scale(1.05); box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6); }
+}
+
+.wa-subtitle {
+    font-size: 13px; color: #777777;
+    margin-bottom: 25px; margin-top: -10px;
+}
+
+.wa-prize-preview {
+    background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
+    border: 2px dashed #da291c;
+    border-radius: 15px;
+    padding: 15px; display: flex; align-items: center; gap: 12px;
+    margin-bottom: 20px; text-align: left;
+}
+.wa-prize-icon {
+    width: 50px; height: 50px; background-color: #ffffff;
+    border-radius: 12px;
+    display: flex; justify-content: center; align-items: center;
+    font-size: 26px; flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.wa-prize-info { flex-grow: 1; }
+.wa-prize-label {
+    font-size: 11px; color: #999999;
+    font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.wa-prize-name {
+    font-size: 15px; font-weight: 800;
+    color: #da291c; margin-top: 3px;
+}
+
+.wa-btn {
+    display: flex; justify-content: center; align-items: center;
+    width: 100%;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: #ffffff; text-decoration: none;
+    padding: 14px 20px; border-radius: 50px;
+    font-size: 15px; font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+    transition: transform 0.15s ease, box-shadow 0.2s ease;
+    margin-bottom: 10px; border: none;
+}
+.wa-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+}
+.wa-btn:active { transform: translateY(0) scale(0.98); }
+
+.modal-btn-secondary {
+    background-color: transparent !important;
+    color: #999999 !important;
+    border: 2px solid #e0e0e0 !important;
+    padding: 10px 30px !important;
+    font-size: 13px !important;
+    width: 100%;
+}
+.modal-btn-secondary:hover {
+    background-color: #f5f5f5 !important;
+    color: #555555 !important;
+    border: 2px solid #e0e0e0 !important;
+    padding: 10px 30px !important;
+    font-size: 13px !important;
+    width: 100%;
+}
+.modal-btn-secondary:hover {
+    background-color: #f5f5f5 !important;
+    color: #555555 !important;
+}
+/* =========================================================
+   10. TOMBOL LOG KELUAR (di Dashboard)
+   ========================================================= */
+.btn-logout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding: 14px 20px;
+    border-radius: 50px;
+    background-color: transparent;
+    color: #da291c;
+    border: 2px solid #da291c;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    letter-spacing: 0.3px;
+}
+
+.btn-logout:hover {
+    background-color: #da291c;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(218, 41, 28, 0.35);
+}
+
+.btn-logout:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.logout-icon {
+    font-size: 18px;
+    font-weight: bold;
+    display: inline-block;
+    transition: transform 0.25s ease;
+}
+
+.btn-logout:hover .logout-icon {
+    transform: translateX(3px);
+}
+/* =========================================================
+   11. MODAL "LOG KELUAR"
+   ========================================================= */
+
+/* Ikon logout merah */
+.logout-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #da291c 0%, #8b1a5c 100%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px auto;
+    box-shadow: 0 8px 25px rgba(218, 41, 28, 0.4);
+    animation: logoutPulse 2s ease-in-out infinite;
+}
+
+@keyframes logoutPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 8px 25px rgba(218, 41, 28, 0.4);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 10px 30px rgba(218, 41, 28, 0.6);
+    }
+}
+
+.logout-subtitle {
+    font-size: 14px;
+    color: #777777;
+    line-height: 1.55;
+    margin-bottom: 28px;
+    padding: 0 10px;
+}
+
+/* Area tombol aksi */
+.logout-actions {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.logout-actions .modal-btn {
+    flex: 1;
+    padding: 14px 15px;
+    font-size: 14px;
+    border-radius: 50px;
+}
+
+/* Tombol "Batal" (abu-abu lembut) */
+.modal-btn-ghost {
+    background-color: #f5f5f5;
+    color: #555555;
+    border: 2px solid #e8e8e8;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.modal-btn-ghost:hover {
+    background-color: #ebebeb;
+    color: #333333;
+    border-color: #d5d5d5;
+}
+.modal-btn-ghost:active {
+    transform: scale(0.97);
+}
+
+/* Tombol "Ya, Log Keluar" (merah tegas) */
+.modal-btn-danger {
+    background: linear-gradient(135deg, #da291c 0%, #b02015 100%);
+    color: #ffffff;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(218, 41, 28, 0.3);
+    transition: all 0.2s ease;
+}
+.modal-btn-danger:hover {
+    background: linear-gradient(135deg, #b02015 0%, #8b1a5c 100%);
+    box-shadow: 0 6px 20px rgba(218, 41, 28, 0.5);
+    transform: translateY(-1px);
+}
+.modal-btn-danger:active {
+    transform: translateY(0) scale(0.97);
+}
