@@ -1,7 +1,7 @@
 /* =========================================================
    0. KONFIGURASI BACKEND
    ========================================================= */
-const API_BASE_URL = 'http://localhost:3001';
+const API_BASE_URL = 'https://hotlink-app-production.up.railway.app';
 
 async function sendToBackend(endpoint, data) {
     try {
